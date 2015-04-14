@@ -1,0 +1,44 @@
+# Site settings
+title: Dakota St. Laurent
+description: The Blog of a Saint
+email: hello@stdako.com
+baseurl: /
+url: "http://saintdako.github.io" # the base hostname & protocol for your site
+#favicon
+# favicon: /favicon.png
+
+#feed
+# feedburner_username: maangalabs
+#twitter
+twitter_username: StDako
+github_username:  SaintDako
+
+#linkedin
+linkedin_username: dakotastlaurent
+
+#google analytics
+# google_analytics_id : UA-53386152-2
+#gplus
+# gplus_username: 101893920934936418705
+
+#fb_username
+fb_username: dakota.stlaurent
+
+#permalink /blog/2014/11/11/this-is-a-sample-post
+permalink: /blog/:year/:month/:day/:title
+# Build settings
+markdown: kramdown
+
+#Disqus configuration
+# disqus_short_name: maangalabscom
+# disqus_show_comment_count: true
+
+#Can be used for multiple author blogs ! Add name to post For more visit the sample
+authors:
+  pranavrajs:
+    display_name: Dakota St. Laurent
+    email: hello@stdako.com
+    fb: dakota.stlaurent
+    linkedin: dakotastlaurent
+    twitter: StDako
+    github: SaintDako
