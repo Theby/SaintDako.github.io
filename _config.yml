@@ -1,7 +1,7 @@
 # Site settings
 title: Dakota St. Laurent
-description: The Blog of a Saint
-email: hello@stdako.com
+description: King of the Rain
+email: hello@saintdako.com
 baseurl: /
 url: "http://saintdako.github.io" # the base hostname & protocol for your site
 #favicon
@@ -35,7 +35,7 @@ markdown: kramdown
 
 #Can be used for multiple author blogs ! Add name to post For more visit the sample
 authors:
-  pranavrajs:
+  saintdako:
     display_name: Dakota St. Laurent
     email: hello@stdako.com
     fb: dakota.stlaurent
