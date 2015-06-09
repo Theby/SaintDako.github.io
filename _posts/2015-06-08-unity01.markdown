@@ -8,20 +8,21 @@ categories: unity
 I wrote a blog post on Medium a while ago ([here](https://medium.com/@SaintDako/a-very-brief-introduction-to-unity-2d-e2b0d6ba7aec)), doing a brief introduction to Unity 2D. I was planning on doing multiple parts to that tutorial, but I never went through with it. Let's try again!
 
 This tutorial will consist of making a character move around while not falling into oblivion by adding a platform. We'll also make the character jump, and change the direction it's facing when we actually make it turn around.
+<!-- more -->
 
 Unity 5 came out recently, so we'll be using that. It looks pretty cool. Go install that first.
 
 After installing it, open up a new project. Pick a name and a directory, put make sure to click "2D".
 
---------------- INSERT IMAGE HERE 00-NewProject
+![New Project](http://i.imgur.com/3ZcEBxz.png "Creating a 2D project in Unity")
 
 My Unity looks like this:
 
---------------- INSERT IMAGE HERE 01-UnityLayout
+![My Unity Layout](http://i.imgur.com/Iruz3GX.png "My Unity layout")
 
 Download the [Unity 2D sample pack](https://www.assetstore.unity3d.com/en/#!/content/18684), as we'll be using some of its assets. To do this, visit the link and click "Open in Unity". Then click "Import", and a list of files and folders will popup with checkboxes. Deselect the "Example Games" folder.
 
---------------- INSERT IMAGE HERE 02-...
+![Importing 2D Assets](http://i.imgur.com/kqFsD5n.png "Importing 2D assets")
 
 In the **Projects** tab, you'll notice that two folders were created: *Fonts* and *Sprites*. Create some extra folders: *Animations*, *Audio*, *Materials*, *Physics Materials*, *Prefabs*, *Scenes*, and *Scripts*.
 
@@ -29,15 +30,15 @@ In the **Projects** tab, you'll notice that two folders were created: *Fonts* an
 
 Underneath the **Hierarchy** tab, click Create (or right click in empty space) and select "Create Empty". The object should be selected (highlighted); click it if it is not. Underneath the **Inspector** tab, rename the object to "Foregrounds". Drag this object from the Hierarchy down to the the Projects tab underneath the *Prefabs* folder. Click on the object in the Hierarchy and notice that in the Inspector, there are three buttons: Select, Revert, Apply.
 
---------------- INSERT IMAGE HERE 03-InspectorButtons
+![Inspector Buttons](http://i.imgur.com/12yWDJ4.png "Inspector buttons, on the right")
 
 Right click on the object (in the Hierarchy) and select "Create Empty". Rename this new object to "Platform1". In the Inspector, click the "Add Component" button and select Rendering > Sprite Renderer. Drag Assets > Sprites > GrassSprite to the Sprite field. Something will appear in the Scene view!
 
---------------- INSERT IMAGE HERE 04-AddingSprite
+![Attaching Sprite](http://i.imgur.com/e5dT324.png "Attaching a sprite to the platform object; drag sprite into the red box")
 
 While still selecting Platform1, go to the Hierarchy, and underneath the object’s Sprite Renderer component, change the Sorting Layer dropdown option to “Foreground”. Notice that there is also a Layer dropdown.
 
---------------- INSERT IMAGE HERE 05-PlatformSortingLayer
+![Layers](http://i.imgur.com/FrESbYX.png "Layers; the sorting layer dropdown is active, while the layer dropdown is in the red box")
 
 You may be asking, what is a *Layer* and what is a *Sorting Layer*?
 
@@ -64,7 +65,7 @@ The *is Trigger* checkbox tells the Unity engine, when checked, that this object
 
 For the Sprite Renderer, choose Assets > Sprites > BirdEnemyIdleSprite. Change the Sorting Layer dropdown option to “Player”. Also, drag the Character object down into the Prefabs folder.
 
-------------- INSERT IMAGE HERE 06-CharacterComponents
+![Character components](http://i.imgur.com/1i4GeeG.png "Showing the different components of the character")
 
 To start playing our "game", hit the Play button, or Ctrl+P. Our character will fall into oblivion.
 
@@ -78,13 +79,13 @@ So, create a new Empty object and call it “PlatformCollider”. It can be a ch
 
 Click the Layer dropdown and select “Add Layer…”. Call this layer “Ground” and make PlatformCollider use it. Also, drag PlatformCollider from the Hierarchy to the Prefabs folder. This will allow us to make a copy of it later.
 
-------------- INSERT IMAGE HERE 07-PlatformCollider
+![PlatformCollider](http://i.imgur.com/rlR9mgW.png "Showing the details of the PlatformCollider")
 
 Make sure to click the Apply button. This allows you to reuse the platform as a “package” — all you need to do is change its position. Let's try doing that by adding another platform. Create another Empty object under Foregrounds in the Hierarchy, and rename it "Platform2". Add a SpriteRenderer to it, with the same sprite (or a different one, if you want). Change the x-position under Transform to -10 to move it.
 
 Now go to the Prefabs folder and drag PlatformCollider into Platform2 to make the collider a child of Platform2. Now, Platform2 has its own edge collider! We didn't even need to change its position.
 
-------------- INSERT IMAGE HERE 08-PlatformCollider2
+![PlatformCollider2](http://i.imgur.com/2FCvTVN.png "Showing that PlatformCollider2 is identical to the original")
 
 Hit play. The bird should fall onto the top of the platform! You may notice that the bird seems to “float” above the platform — change its Box Collider dimensions to fix this.
 
@@ -92,9 +93,9 @@ Hit play. The bird should fall onto the top of the platform! You may notice that
 
 Time to get into the programming side of things (finally!). Select the Character object in the Hierarchy, and add the component New Script. Call it whatever you wish; I named it “BirdControl”. I’m going to be programming in C#, and I may put JavaScript and Boo versions on GitHub in the future. Open up the script in whatever editor you prefer.
 
-The two built-in functions are Start and Update. Change Start to Awake. What’s the difference? Awake is called first and should be used for defining references between scripts and initalization of things. Start is called second immediately after the first update. Check out [this video](http://unity3d.com/learn/tutorials/modules/beginner/scripting/awake-and-start) for more detail. We’ll leave Awake() empty for now.
+The two built-in functions are Start and Update. Change Start to Awake. What’s the difference? Awake is called first and should be used for defining references between scripts and initalization of things. Start is called second immediately after the first update. Check out [this video](http://unity3d.com/learn/tutorials/modules/beginner/scripting/awake-and-start) for more detail.
 
-We’ll also leave Update() empty. Add a third function called FixedUpdate. Update is called every frame, should be used for e.g. moving non-physics objects, simple timers and receiving input, and its update intervals may vary. FixedUpdate is called consistently (every physics time-step), so any physics object (i.e. RigidBody) should be updated here. See this video for more detail.
+We’ll leave Update() empty. Add a third function called FixedUpdate. Update is called every frame, should be used for e.g. moving non-physics objects, simple timers and receiving input, and its update intervals may vary. FixedUpdate is called consistently (every physics time-step), so any physics object (e.g. RigidBody) should be updated here. [See this video for more detail](http://unity3d.com/learn/tutorials/modules/beginner/scripting/update-and-fixedupdate).
 
 So our code should look like this right now:
 
@@ -124,14 +125,12 @@ Not very interesting. Let's define some variables:
 
 {% highlight csharp %}
 // Using stuff...
-
 public class BirdControl : MonoBehaviour {
 
     [HideInInspector]
-    public bool facingRight = false;
-    [HideInInspector]
-    public bool jump = false;
+    public Rigidbody2D player;
 
+    bool facingRight = false;
     public float speed = 5.0f;
 
     // functions go here...
@@ -139,18 +138,33 @@ public class BirdControl : MonoBehaviour {
 
 {% endhighlight %}
 
-facingRight is what it sounds like — it’s a boolean that represents whether or not our character is facing right. jump is a boolean that will be used in the next section, and speed is the moving speed of the character.
+player is the character itself. facingRight is what it sounds like — it’s a boolean that represents whether or not our character is facing right. speed is the moving speed of the character.
 
-[HideInInspector] prevents the variable from being shown in the Editor. If you save the script and look at the Character object, you will see a speed variable that can be edited there. This is for easily tweaking the player’s configuration while Play mode is active.
+The public keyword allows other scripts to see the variable, and we may want other scripts to see the player object. [HideInInspector] prevents the variable from being shown in the Editor. If you save the script and look at the Character object, you will see a speed variable that can be edited there. This is for easily tweaking the player’s configuration while Play mode is active.
+
+![Speed Variable](http://i.imgur.com/SKUhnbl.png "The speed variable is inside the inspector and can easily be altered")
+
+We want to define the player object when the script starts up (when it awakes); we can do that by calling the GetComponent function with the Rigidbody2D type. Let's put this in the Awake function:
+
+{% highlight csharp %}
+// Using stuff...
+public class BirdControl : MonoBehaviour {
+    // variables go here...
+
+    void Awake () {
+        player = GetComponent<Rigidbody2D>();
+    }
+
+    // other functions...
+}
+{% endhighlight %}
 
 Now what we’ll do is get the user’s input from the arrow keys. Unity automatically maps some keys for us. The left and right arrow keys are mapped to the “Horizontal” axis. We’ll start off simple and just grab which direction we’re going (1 is right, -1 is left):
 
 {% highlight csharp %}
 // Using stuff...
-
 public class BirdControl : MonoBehaviour {
     // variables go here...
-
     // other functions go here...
 
     void FixedUpdate() {
@@ -164,15 +178,12 @@ Now, let’s update the velocity so we can actually start moving!
 
 {% highlight csharp %}
 // Using stuff...
-
 public class BirdControl : MonoBehaviour {
     // variables go here...
-
     // other functions go here...
 
     void FixedUpdate() {
         float h = Input.GetAxisRaw("Horizontal");
-        Rigidbody2D player = GetComponent<Rigidbody2D>();
 
         if (h > 0) {
             player.velocity = new Vector2(speed, player.velocity.y);
@@ -191,15 +202,12 @@ Hit Play. Our player moves, but it doesn’t turn! We need to add the functional
 
 {% highlight csharp %}
 // Using stuff...
-
 public class BirdControl : MonoBehaviour {
     // variables go here...
-
     // other functions go here...
 
     void FixedUpdate() {
         float h = Input.GetAxisRaw("Horizontal");
-        Rigidbody2D player = GetComponent<Rigidbody2D>();
 
         if (h > 0) {
             player.velocity = new Vector2(speed, player.velocity.y);
@@ -217,15 +225,9 @@ public class BirdControl : MonoBehaviour {
 
 {% highlight csharp %}
 // Using stuff...
-
 public class BirdControl : MonoBehaviour {
     // variables go here...
-
-    // other functions go here...
-
-    void FixedUpdate() {
-        // ...
-    }
+    // all other functions go here...
 
     void Flip(Rigidbody2D player) {
         facingRight = !facingRight;
@@ -234,6 +236,90 @@ public class BirdControl : MonoBehaviour {
         scalingFactor.x *= -1;
         player.transform.localScale = scalingFactor;
     }
+}
 {% endhighlight %}
 
 Awesome! Let’s do something even more interesting: jumping.
+
+## Making the character jump
+
+We need to think about how the logic of jumping works. Let's assume we only want a single jump. If the character is on the ground ("grounded"), then it should be able to jump. If the character is not on the ground, then it shouldn't be able to.
+
+If we had some invisible object anchored right beneath our character, and any kind of object defined as "ground" was between this anchored object and our character, then the character should be defined as grounded; otherwise, it is not.
+
+So let's do exactly that. Try adding an Empty child object to the Character. Rename this new child object to “groundCheck”. Position it so that it is below the character by a bit.
+
+Let's edit our script file to add some useful variables:
+
+{% highlight csharp %}
+// Using stuff ...
+public class BirdControl : MonoBehaviour {
+    // player, facingRight and speed go here...
+
+    [HideInInspector]
+    public bool jump = false;
+    public float jumpForce = 1000f;
+
+    [HideInInspector]
+    private bool grounded = false;
+    Transform groundCheck;
+
+    void Awake () {
+        player = GetComponent<Rigidbody2D>();
+        groundCheck = player.transform.Find("groundCheck");
+    }
+
+    // other functions go here...
+}
+{% endhighlight %}
+
+jump is a boolean that will be true if the character is junping, and false otherwise. jumpForce (which can be changed in the Inspector) is the amount of force that will be applied to the character vertically when the jump button is pressed.
+
+grounded is a boolean that will be true if we are grounded, and false otherwise. groundCheck is a Transform object that represents the position of the groundCheck object we just created. Now, we will update the “jump” variable when the user hits the Jump button (spacebar), but only if we are grounded. We also have to check if we’re actually grounded. We will check for these things in our Update function:
+
+
+{% highlight csharp %}
+// Using stuff...
+public class BirdControl : MonoBehaviour {
+    // variables go here...
+    // Awake goes here...
+
+    void Update () {
+        grounded = Physics2D.Linecast(player.transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        if (Input.GetButtonDown("Jump") && grounded)
+            jump = true;
+    }
+
+    // other functions go here...
+}
+{% endhighlight %}
+
+The Physics2D.Linecast function does what we thought of before - it determines if something is between the anchored object and our character by drawing a line between them and checking for intersecting objects. The third argument with the << operator (a left bitshift) is black magic, and I'm really not sure why the operator itself is there. However, it tells the engine to look in particular for **objects with the layer "Ground"**, which is why it's good to have labels!
+
+Then, we check to see if the "Jump" button is pressed (space by default, I believe) and if grounded is true. If both of these conditions are satisfied, we set the jump variable to true.
+
+And then what? Well, we need to tell the character to actually do something! Since we'll be changing the character's physical properties, let's check for jumping inside the FixedUpdate function:
+
+{% highlight csharp %}
+// blah blah blah ...
+
+    void FixedUpdate() {
+        // movement logic and all that goes here...
+
+        if (jump) {
+            player.AddForce(new Vector2(0, jumpForce));
+            jump = false;
+        }
+    }
+{% endhighlight %}
+
+Using player.AddForce() makes the jumping look more natural, due to acceleration and decceleration, instead of changing the velocity directly. It applies a force to the object with the magnitudes in each direction that are passed to the vector constructor.
+
+If you hit Play, then it should work out! Hopefully. If everything is right.
+
+Anyway, that's about it for this part of the tutorial. I hope that made sense! If you find any typos or have any suggestions, feel free to submit a pull request as these posts will be on GitHub! The repo is [here](https://github.com/SaintDako/SaintDako.github.io).
+
+{% highlight csharp %}
+{% endhighlight %}
+
