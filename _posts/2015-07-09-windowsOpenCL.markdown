@@ -20,22 +20,24 @@ There are a few things to install. The first thing is the GeForce driver for you
 
 After installing that, install CUDA (current version is 7.0) from [NVIDIA's CUDA Download Page](https://developer.nvidia.com/cuda-downloads). The network installer and the local installer are both fine - the former will download files during the installation, whereas the latter has everything bundled in one. Note that **CUDA comes with OpenCL 1.1**, which is quite old! I wouldn't hold my breath for a newer version of OpenCL, as NVIDIA GPUs use CUDA anyway.
 
-Now, we need to install gcc (and g++). If you already have gcc, you need to make sure that it is the 64-bit version! If you installed MinGW-32, then it will be the 32-bit version, unfortunately. The way to get around this is by installing [the 64-bit version of MinGW, called MinGW-w64](http://mingw-w64.org/doku.php/download). I've only tested the *Mingw-builds* installer, as well as installing via Cygwin.
+#### Using g++ (and/or gcc)
+
+Now, we need to install g++ (and/or gcc). If you already have g++, you need to make sure that it is the 64-bit version! If you installed MinGW-32, then it will be the 32-bit version, unfortunately. The way to get around this is by installing [the 64-bit version of MinGW, called MinGW-w64](http://mingw-w64.org/doku.php/download). I've only tested the *Mingw-builds* installer, as well as installing via Cygwin.
 
 
-#### Mingw-builds
+#### Mingw-builds (g++/gcc only)
 
 If using the mingw-builds installer, make sure to specify the correct settings when installing. I picked "win32" for the threads option.
 
-After it installs, we need to add the bin to the PATH. I added the following directory to my PATH variable: `C:\Program Files\mingw-w64\x86_64-5.1.0-win32-seh-rt_v4-rev0\mingw64\bin`. Now in the command prompt, running `gcc --version` should result in something like `gcc <x86_64-win32-seh-rev0, Built by MinGW-W64 project> 5.1.0`.
+After it installs, we need to add the bin to the PATH. I added the following directory to my PATH variable: `C:\Program Files\mingw-w64\x86_64-5.1.0-win32-seh-rt_v4-rev0\mingw64\bin`. Now in the command prompt, running `g++ --version` should result in something like `g++ <x86_64-win32-seh-rev0, Built by MinGW-W64 project> 5.1.0`.
 
-#### Cygwin
+#### Cygwin (g++/gcc only)
 
 To install via Cygwin, run the Cygwin set up file and search for `mingw64-x86-64`. I installed everything that comes up under the Devel category. Not all may be necessary, in fact only the gcc package probably is, but whatever.
 
-In the Cygwin shell, running `gcc --version` will show us that g++ is indeed installed, but on my installation, this is not the 64-bit version of g++. The command is actually `x86_64-w64-mingw32-gcc`, which is terribly long, but it can be aliased.
+In the Cygwin shell, running `g++ --version` will show us that g++ is indeed installed, but on my installation, this is not the 64-bit version of g++. The command is actually `x86_64-w64-mingw32-g++`, which is terribly long, but it can be aliased.
 
-### Compiling and running some code
+### Compiling and running some code (g++/gcc)
 
 Alright, now that everything should be installed (if your computer didn't kerplode), we can try compiling and running some stuff. Let's try finding all of the devices that support OpenCL on our computer by using the following C++ code:
 
@@ -118,6 +120,15 @@ In one line:
 g++ -std=c++0x -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include"  main.cpp  -o  main.exe -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\lib\x64" -lOpenCL
 {% endhighlight %}
 
+### Output
+
+The desired output is something like:
+
+{% highlight bash %}
+Using platform: NVIDIA CUDA
+Device 0: GeForce GTX 960
+{% endhighlight %}
+
 ## Conclusion
 
-What a pain. Use Makefiles to *make* your life easier (get it?!) and have fun!
+What a pain. Use Makefiles to *make* your life easier (get it?!) and have fun! I will be adding the Visual Studio version to this post sometime soon.
