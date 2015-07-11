@@ -28,34 +28,36 @@ In the **Projects** tab, you'll notice that two folders were created: *Fonts* an
 
 ## Creating a simple foreground
 
-Underneath the **Hierarchy** tab, click Create (or right click in empty space) and select "Create Empty". The object should be selected (highlighted); click it if it is not. Underneath the **Inspector** tab, rename the object to "Foregrounds". Drag this object from the Hierarchy down to the the Projects tab underneath the *Prefabs* folder. Click on the object in the Hierarchy and notice that in the Inspector, there are three buttons: Select, Revert, Apply.
-
-![Inspector Buttons](http://i.imgur.com/12yWDJ4.png "Inspector buttons, on the right")
+Underneath the **Hierarchy** tab, click Create (or right click in empty space) and select "Create Empty". The object should be selected (highlighted); click it if it is not. Underneath the **Inspector** tab, rename the object to "Foregrounds". 
 
 Right click on the object (in the Hierarchy) and select "Create Empty". Rename this new object to "Platform1". In the Inspector, click the "Add Component" button and select Rendering > Sprite Renderer. Drag Assets > Sprites > GrassSprite to the Sprite field. Something will appear in the Scene view!
 
 ![Attaching Sprite](http://i.imgur.com/e5dT324.png "Attaching a sprite to the platform object; drag sprite into the red box")
 
-While still selecting Platform1, go to the Hierarchy, and underneath the object’s Sprite Renderer component, change the Sorting Layer dropdown option to “Foreground”. Notice that there is also a Layer dropdown.
+Drag the Platform1 object from the Hierarchy to the *Prefabs* folder in the Projects tab. Select the Platform1 object in the Hierarchy again. Notice that, at the top of the Inspector, there are three buttons beside the label "Prefab": Select, Revert and Apply. By putting our Platform1 object in the Prefabs folder, it is easy to create duplicates, which we'll do later. When changes are made to a Prefab, the Apply button should be pressed to apply the changes to all duplicates.
+
+![Inspector Buttons](http://i.imgur.com/TF1LS3x.png "Inspector buttons, on the right")
+
+While selecting the Platform1 object in the Hierarchy, underneath the object’s Sprite Renderer component, change the Sorting Layer dropdown option to "Foreground". Notice that there is also a Layer dropdown. Click the Layer dropdown and select "Add Layer...". Call this layer "Ground" and make Platform use it.
 
 ![Layers](http://i.imgur.com/FrESbYX.png "Layers; the sorting layer dropdown is active, while the layer dropdown is in the red box")
 
 You may be asking, what is a *Layer* and what is a *Sorting Layer*?
 
 - A Layer is used by cameras and lights for rendering and illumination of only parts of a scene (as described in [the documentation](http://docs.unity3d.com/Manual/Layers.html)). 
-- A Sorting Layer tells Unity what order to draw the Sprites in. To see the order, click the “Layers” dropdown above the inspector and look at the “Sorting Layers” section. The first layer will be drawn first, and the last layer will be drawn last. To change this, click “Edit Layers”. (This doesn't need to be done right now.)
+- A Sorting Layer tells Unity what order to draw the Sprites in. To see the order, click the "Layers" dropdown above the inspector and look at the "Sorting Layers" section. The first layer will be drawn first, and the last layer will be drawn last. To change this, click "Edit Layers". (This doesn't need to be done right now.)
 
-Select the Foregrounds objct in the Hierarchy. Then, in the Inspector, click the Apply button. This changes the Prefab file.
+Select the Foregrounds object in the Hierarchy. Click the Apply button to change our Prefab. Now, our Prefab should have a Sorting Layer, a Layer and a Sprite.
 
 ## Adding a character
 
-In the hierarchy, create another Empty object (but not as a child of any of the other objects). Name this object “Character”. Add the following components:
+In the hierarchy, create another Empty object (but not as a child of any of the other objects). Name this object "Character". Add the following components:
 
 - Physics2D > RigidBody2D
 - Rendering > Sprite Renderer
 - Physics2D > Box Collider 2D.
 
-(From now on, when I say to add a component, I mean to do that in the Inspector, unless otherwise stated). Underneath the RigidBody2D component, change whatever you like. For details about all of the options, check out the [RigidBody2D documentation](http://docs.unity3d.com/ScriptReference/Rigidbody2D.html). BUT, change the Interpolate dropdown option to “Interpolate”.
+(From now on, when I say to add a component, I mean to do that in the Inspector, unless otherwise stated). Underneath the RigidBody2D component, change whatever you like. For details about all of the options, check out the [RigidBody2D documentation](http://docs.unity3d.com/ScriptReference/Rigidbody2D.html). BUT, change the Interpolate dropdown option to "Interpolate".
 
 The Box Collider 2D component allows us to change the hitbox of the object, as well as the physics material. 
 
@@ -63,9 +65,9 @@ The *physics material* is a kind of object that describes the coefficient of fri
 
 The *is Trigger* checkbox tells the Unity engine, when checked, that this object is only meant for activating events and not for interacting (e.g. colliding) with other objects. For example, when a player falls off of the map, they should pass an invisible boundary that respawns them. If the option is selected, the Box Collider will be ignored by the physics engine.
 
-For the Sprite Renderer, choose Assets > Sprites > BirdEnemyIdleSprite. Change the Sorting Layer dropdown option to “Player”. Also, drag the Character object down into the Prefabs folder.
+For the Sprite Renderer, choose Assets > Sprites > BirdEnemyIdleSprite. Change the Layer dropdown option and the Sorting Layer dropdown option to "Player".
 
-![Character components](http://i.imgur.com/1i4GeeG.png "Showing the different components of the character")
+![Character components](http://i.imgur.com/1yfHUbl.png "Showing the different components of the character")
 
 To start playing our "game", hit the Play button, or Ctrl+P. Our character will fall into oblivion.
 
@@ -75,23 +77,21 @@ Our game is not very exciting -- all that happens is our character falls forever
 
 The difference between using a BoxCollider2D versus an EdgeCollider2D is that, with the BoxCollider2D, the game must check for more cases in which objects could have hit it (i.e. it could have been collided with on the top, left, right or bottom side). The EdgeCollider2D, with only one vertex (line), takes a smaller number of calculations to determine collisions. If the EdgeCollider2D has more vertices, then it will (probably) be worse in terms of performance.
 
-So, create a new Empty object and call it “PlatformCollider”. It can be a child of Foregrounds, or of Platform1, or be on its own. For the sake of logic, it’s best for it to be a child of Platform1, as it reminds us that it is attached to Platform1. Change its y-position such that it is right at the top of the platform (if you haven’t moved anything at all, this is about y = -0.98). Then, add Physics2D > Edge Collider 2D. Click on the button with the label “Edit Collider” and drag the ends to resize appropriately. (I’m not sure how to apply a straight-ener to the collider, yet).
+So, add the component Physics2D > Edge Collider 2D to the Platform (in the Hierarchy). Change its y-position such that it is right at the top of the platform (if you haven’t moved anything at all, this is about y = -1).
 
-Click the Layer dropdown and select “Add Layer…”. Call this layer “Ground” and make PlatformCollider use it. Also, drag PlatformCollider from the Hierarchy to the Prefabs folder. This will allow us to make a copy of it later.
+![PlatformCollider](http://i.imgur.com/GxW4Yc5.png "Showing the components of the Platform")
 
-![PlatformCollider](http://i.imgur.com/rlR9mgW.png "Showing the details of the PlatformCollider")
+Make sure to click the Apply button, so our Prefab should also have an Edge Collider 2D. Now, let's make a second platform. This is easy since we made our platform a Prefab. Drag the Platform Prefab into the Foregrounds object to create a second child. There's no difference on the screen because because the x-position of our new platform needs to be changed -- it's overlapping with the original platform. Change the x-position to -10.
 
-Make sure to click the Apply button. This allows you to reuse the platform as a “package” — all you need to do is change its position. Let's try doing that by adding another platform. Create another Empty object under Foregrounds in the Hierarchy, and rename it "Platform2". Add a SpriteRenderer to it, with the same sprite (or a different one, if you want). Change the x-position under Transform to -10 to move it.
+If you click the Apply button, it will change the position of the Prefab, but not the position of other Platforms - the transform properties do not change. However, changing the Layer of one individual Hierarchy object and applying the changes will change every other object.
 
-Now go to the Prefabs folder and drag PlatformCollider into Platform2 to make the collider a child of Platform2. Now, Platform2 has its own edge collider! We didn't even need to change its position.
+![PlatformCollider2](http://i.imgur.com/vsBoh85.png "Showing that the components of the second platform are identical") 
 
-![PlatformCollider2](http://i.imgur.com/2FCvTVN.png "Showing that PlatformCollider2 is identical to the original")
-
-Hit play. The bird should fall onto the top of the platform! You may notice that the bird seems to “float” above the platform — change its Box Collider dimensions to fix this.
+Hit play. The bird should fall onto the top of the platform! You may notice that the bird seems to "float" above the platform; change its Box Collider dimensions to fix this.
 
 ## Moving the Character
 
-Time to get into the programming side of things (finally!). Select the Character object in the Hierarchy, and add the component New Script. Call it whatever you wish; I named it “BirdControl”. I’m going to be programming in C#, and I may put JavaScript and Boo versions on GitHub in the future. Open up the script in whatever editor you prefer.
+Time to get into the programming side of things (finally!). Select the Character object in the Hierarchy, and add the component New Script. Call it whatever you wish; I named it "BirdControl". I’m going to be programming in C#, and I may put JavaScript and Boo versions on GitHub in the future. Open up the script in whatever editor you prefer.
 
 The two built-in functions are `Start` and `Update`. Change `Start` to `Awake`. What’s the difference? `Awake` is called first and should be used for defining references between scripts and initalization of things. `Start` is called second immediately after the first update. Check out [this video](http://unity3d.com/learn/tutorials/modules/beginner/scripting/awake-and-start) for more detail.
 
@@ -160,7 +160,7 @@ public class BirdControl : MonoBehaviour {
 }
 {% endhighlight %}
 
-Now what we’ll do is get the user’s input from the arrow keys. Unity automatically maps some keys for us. The left and right arrow keys are mapped to the “Horizontal” axis. We’ll start off simple and just grab which direction we’re going (1 is right, -1 is left). Since we're getting user input, let's put this in `Update()`:
+Now what we’ll do is get the user’s input from the arrow keys. Unity automatically maps some keys for us. The left and right arrow keys are mapped to the "Horizontal" axis. We’ll start off simple and just grab which direction we’re going (1 is right, -1 is left). Since we're getting user input, let's put this in `Update()`:
 
 {% highlight csharp %}
 // Using stuff...
@@ -248,7 +248,7 @@ We need to think about how the logic of jumping works. Let's assume we only want
 
 If we had some invisible object anchored right beneath our character, and any kind of object defined as "ground" was between this anchored object and our character, then the character should be defined as grounded; otherwise, it is not.
 
-So let's do exactly that. Try adding an Empty child object to the Character. Rename this new child object to “groundCheck”. Position it so that it is below the character by a bit.
+So let's do exactly that. Try adding an Empty child object to the Character. Rename this new child object to "groundCheck". Position it so that it is below the character by a bit.
 
 Let's edit our script file to add some useful variables:
 
