@@ -17,7 +17,7 @@ github_username:  SaintDako
 linkedin_username: dakotastlaurent
 
 #google analytics
-# google_analytics_id : UA-53386152-2
+google_analytics_id : UA-65122404-1
 #gplus
 # gplus_username: 101893920934936418705
 
@@ -30,14 +30,14 @@ permalink: /blog/:year/:month/:day/:title
 markdown: kramdown
 
 #Disqus configuration
-# disqus_short_name: maangalabscom
-# disqus_show_comment_count: true
+disqus_short_name: SaintDako
+disqus_show_comment_count: true
 
 #Can be used for multiple author blogs ! Add name to post For more visit the sample
 authors:
   saintdako:
     display_name: Dakota St. Laurent
-    email: hello@stdako.com
+    email: hello@saintdako.com
     fb: dakota.stlaurent
     linkedin: dakotastlaurent
     twitter: StDako

@@ -3,6 +3,7 @@ layout: post
 title:  "An Introduction to Unity 2D (Part 2)"
 date:   2015-07-12 05:00:00
 categories: unity
+comments: true
 ---
 
 Welcome to the second part of the Unity 2D tutorial series! In the first part, we made a character not fall into oblivion by landing on a platform, and we got it to move and jump. In this part, we'll make our character double jump, make the camera follow the character, allow our character to pick up coins, and add a score counter!
@@ -120,7 +121,7 @@ public class BirdControl : MonoBehavior {
 
 Great!
 
-Wait a minute, what if our character is walking down a slope? In that case, the character has not yet jumped and is falling, nor has it walked off a ledge. What we should do before is check to see if it's grounded, and if it isn't, then use this logic. Conveniently, we already have a `if (grounded)` statement, so all we need to do is add an `else` branch like so:
+**Wait a minute**, what if our character is walking down a slope? In that case, the character has not yet jumped and is falling, nor has it walked off a ledge, but its y-component of velocity is negative as it is moving down. What we should do before is check to see if it's grounded, and if it isn't, then use this logic. Conveniently, we already have a `if (grounded)` statement, so all we need to do is add an `else` branch like so:
 
 {% highlight csharp %}
 public class BirdControl : MonoBehavior {
@@ -188,7 +189,7 @@ Now, go back to the Inspector for the Coin object and underneath the CircleColli
 
 Before we continue, let's change just a few more things. Let's change the Coin's Layer to a new layer called "Items", and change its Tag to a new tag called "Coin". Also, change the Sorting Layer to "Items". After all of this is done, drag the Coin object from the Hierarchy to the Prefabs folder, as we'll duplicate it in a later part.
 
-[Coin Components](http://i.imgur.com/pV2w9Jk.png "Ooo, shiny.")
+![Coin Components](http://i.imgur.com/pV2w9Jk.png "Ooo, shiny.")
 
 For the record: a "tag" is simply a label of sorts that helps with scripting to identify object(s).
 
@@ -228,11 +229,11 @@ So we can destroy coins -- great. Now what? Let's try adding a score counter usi
 
 Click on the box figure underneath the Rect Transform, hold the Alt key, and select the top right option. This will move the text to the top right corner. It is not exactly at the top right corner because of its width, but this can be left alone.
 
-[ScoreLabel](http://i.imgur.com/z6erg15.png "This image is not representative of what the figure will look like if Alt is held down")
+![ScoreLabel](http://i.imgur.com/z6erg15.png "This image is not representative of what the figure will look like if Alt is held down")
 
 Now, create another Text object and make it a child of ScoreLabel. Name this object "ScoreText", change its text box to `0` and move it to the top right corner again. Change its Pos X property to -40, its Width to 60, and its Alignment to Right (in the Text component). This last option will make sure that when our score increases, it does not grow to the right, but instead to the left.
 
-[ScoreText Details](http://i.imgur.com/bejf90l.png "So many details.")
+![ScoreText Details](http://i.imgur.com/bejf90l.png "So many details.")
 
 To actually increase the score, let's open up our character's script again. To work with UI objects, we need to use another module, so alter the top of the file to be the following:
 

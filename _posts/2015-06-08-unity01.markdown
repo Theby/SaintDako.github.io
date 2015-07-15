@@ -3,6 +3,7 @@ layout: post
 title:  "An Introduction to Unity 2D (Part 1)"
 date:   2015-06-08 21:00:00
 categories: unity
+comments: true
 ---
 
 I wrote a blog post on Medium a while ago ([here](https://medium.com/@SaintDako/a-very-brief-introduction-to-unity-2d-e2b0d6ba7aec)), doing a brief introduction to Unity 2D. I was planning on doing multiple parts to that tutorial, but I never went through with it. Let's try again!
