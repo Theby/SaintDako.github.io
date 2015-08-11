@@ -13,8 +13,8 @@ def boop():
 
 boop()
 {% endhighlight %}
-
 <!-- more -->
+
 Here's a [link to my GitHub][my-github]. Below's a picture of some friends and I recreating The Last Supper:
 
 ![The Last Supper](http://i.imgur.com/6KaTnOO.jpg "The Last Supper")
