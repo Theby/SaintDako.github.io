@@ -6,7 +6,7 @@ categories: unity
 comments: true
 ---
 
-I wrote a blog post on Medium a while ago ([here](https://medium.com/@SaintDako/a-very-brief-introduction-to-unity-2d-e2b0d6ba7aec)), doing a brief introduction to Unity 2D. I was planning on doing multiple parts to that tutorial, but I never went through with it. Let's try again!
+I wrote a blog post on Medium a while ago ([here](https://medium.com/@SaintDako/a-very-brief-introduction-to-unity-2d-e2b0d6ba7aec)), doing a brief introduction to Unity 2D. I was planning on doing multiple parts to that tutorial, but Ire never went through with it. Let's try again!
 
 This tutorial will consist of making a character move around while not falling into oblivion by adding a platform. We'll also make the character jump, and change the direction it's facing when we actually make it turn around.
 <!-- more -->
@@ -174,7 +174,7 @@ public class BirdControl : MonoBehaviour {
 }
 {% endhighlight %}
 
-There is a similar function called `Input.GetAxis`, which returns a number that returns a number in the range of -1 to 1. It is dependent on the sensitivity of the input (e.g. how hard you are pushing on a joystick).
+There is a similar function called `Input.GetAxis`, which returns a number in the range of -1 to 1. It is dependent on the sensitivity of the input (e.g. how hard you are pushing on a joystick).
 
 Now, let’s update the velocity so we can actually start moving!
 
