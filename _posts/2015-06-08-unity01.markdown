@@ -94,7 +94,7 @@ Hit play. The bird should fall onto the top of the platform! You may notice that
 
 Time to get into the programming side of things (finally!). Select the Character object in the Hierarchy, and add the component New Script. Call it whatever you wish; I named it "BirdControl". I’m going to be programming in C#, and I may put JavaScript and Boo versions on GitHub in the future. Open up the script in whatever editor you prefer.
 
-The two built-in functions are `Start` and `Update`. Change `Start` to `Awake`. What’s the difference? `Awake` is called first and should be used for defining references between scripts and initalization of things. `Start` is called second immediately after the first update. Check out [this video](http://unity3d.com/learn/tutorials/modules/beginner/scripting/awake-and-start) for more detail.
+The two built-in functions are `Start` and `Update`. Change `Start` to `Awake`. What’s the difference? `Awake` is called first and should be used for defining references between scripts and initalization of things. `Start` is called second immediately before the first update. Check out [this video](http://unity3d.com/learn/tutorials/modules/beginner/scripting/awake-and-start) for more detail.
 
 We’ll leave `Update()` empty. Add a third function called `FixedUpdate`. `Update` is called every frame, should be used for e.g. moving non-physics objects, simple timers and receiving input, and its update intervals may vary. `FixedUpdate` is called consistently (every physics time-step), so any physics object (e.g. RigidBody) should be updated here. [See this video for more detail](http://unity3d.com/learn/tutorials/modules/beginner/scripting/update-and-fixedupdate).
 
